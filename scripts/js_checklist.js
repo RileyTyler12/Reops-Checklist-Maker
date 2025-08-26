@@ -2,6 +2,18 @@
 //JS for adding, saving, and loading the checklist.
 "use strict";
 
+//Check for saved list, if so populate listArray with saved list and html list
+let listArray;
+if (localStorage.getItem("savedChecklist") !== null) {
+    listArray = JSON.parse(localStorage.getItem("savedChecklist"));
+    listArray.forEach(element => {
+        addListItem(element, false);
+    });
+}
+else {
+    listArray = new Array();
+}
+
 //Create Reference to addButton
 let addButton = document.getElementById("addButton");
 
@@ -12,7 +24,7 @@ addButton.addEventListener("click", validateTextArea);
 function validateTextArea() { //check if textArea is empty, if not add content to checklist
     let textArea = document.getElementById("textArea");
     if (textArea.value.length > 0) {
-        addNewItem();
+        addListItem(textArea.value, true);
         console.log("textArea validated");
     }
     else {
@@ -21,9 +33,25 @@ function validateTextArea() { //check if textArea is empty, if not add content t
 }
 
 //Add New List Item Function
-function addNewItem() {
+function addListItem(text, shouldSave) {
     let checklist = document.getElementById("checklist");
     let listElement = document.createElement("li");
-    listElement.innerHTML = textArea.value;
+    let checkboxElement = document.createElement("input");
+    let checkboxText = document.createElement("p");
+    checkboxElement.type = "checkbox";
+    checkboxElement.value = text;
+    checkboxText.innerHTML = text;
+    listElement.appendChild(checkboxElement);
+    listElement.appendChild(checkboxText);
     checklist.appendChild(listElement);
+    if (shouldSave) {
+        listArray.push(text);
+        //call save list
+        saveList();
+    }
+}
+
+//Save list to localStorage function
+function saveList() {
+    localStorage.setItem("savedChecklist", JSON.stringify(listArray));
 }
