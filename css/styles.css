@@ -79,3 +79,9 @@ ul li {
     margin: 2%;
     list-style: none;
 }
+
+/* Footer Styles */
+footer {
+    padding: 2%;
+    margin: 2%;
+}
