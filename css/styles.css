@@ -75,6 +75,8 @@ ul {
 }
 
 ul li {
+    display: flex;
+    justify-content: center;
     padding: 2%;
     margin: 2%;
     list-style: none;
