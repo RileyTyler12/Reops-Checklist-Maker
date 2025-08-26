@@ -1,9 +1,81 @@
 /*
 Written by Riley Tyler
+Color Palette: https://coolors.co/1c1d21-4ea699-2dd881-6fedb7-726da8
 */
 
 /* Basic CSS Reset */
 body, h1, h2, h3, h4, h5, h6, p, ol, ul {
     margin: 0;
     padding: 0;
+}
+
+/* General Class Styles for background color and border*/
+.eerie-black {
+    background-color: #1C1D21;
+    border: 2px solid #1C1D21;
+    border-radius: 16px;
+}
+.keppel {
+    background-color: #4ea699;
+    border: 2px solid #4ea699;
+    border-radius: 16px;
+}
+.emerald {
+    background-color: #2dd881;
+    border: 2px solid #2dd881;
+    border-radius: 16px;
+}
+.aquamarine {
+    background-color: #6fedb7;
+    border: 2px solid #6fedb7;
+    border-radius: 16px;
+}
+.ultra-violet {
+    background-color: #726da8;
+    border: 2px solid #726da8;
+    border-radius: 16px;
+}
+
+/* General Body Styles */
+body {
+    text-align: center;
+    color: #1C1D21;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+h1 {
+    color: white;
+    padding: 2%;
+    margin: 2%;
+}
+
+/* Add To List Section Styles */
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2%;
+    margin: 2%;
+}
+
+fieldset legend {
+    padding: 1%;
+    margin: 1%;
+}
+
+button {
+    padding: 2%;
+    margin: 2%;
+}
+
+/* List Styles */
+ul {
+    padding: 2%;
+    margin: 2%;
+}
+
+ul li {
+    padding: 2%;
+    margin: 2%;
+    list-style: none;
 }

@@ -41,6 +41,7 @@ function addListItem(text, shouldSave) {
     checkboxElement.type = "checkbox";
     checkboxElement.value = text;
     checkboxText.innerHTML = text;
+    listElement.className = "emerald"; //apply css class to list element
     listElement.appendChild(checkboxElement);
     listElement.appendChild(checkboxText);
     checklist.appendChild(listElement);
