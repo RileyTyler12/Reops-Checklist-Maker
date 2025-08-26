@@ -1,5 +1,5 @@
 //Written by Riley Tyler
-//JS for adding, saving, and loading the checklist.
+//JS for handling the functionality of the checklist.
 "use strict";
 
 //Check for saved list, if so populate listArray with saved list and html list
