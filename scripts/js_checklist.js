@@ -23,13 +23,16 @@ else {
     checkedItemsArray = new Array(listArray.length);
 }
 
-//Create Reference to addButton
+//Create References and eventListeners for html buttons
 let addButton = document.getElementById("addButton");
-
-//Create Event Listener for the Button
+let clearListButton = document.getElementById("clearListButton");
 addButton.addEventListener("click", validateTextArea);
+clearListButton.addEventListener("click", clearList);
 
-//Validate TextArea Function
+
+//Functions
+
+    //Validate TextArea Function
 function validateTextArea() { //check if textArea is empty, if not add content to checklist
     let textArea = document.getElementById("textArea");
     if (textArea.value.length > 0) {
@@ -41,7 +44,7 @@ function validateTextArea() { //check if textArea is empty, if not add content t
     }
 }
 
-//Add New List Item Function
+    //Add New List Item Function
 function addListItem(text, shouldSave) {
     let checklist = document.getElementById("checklist");
     let listElement = document.createElement("li");
@@ -81,8 +84,15 @@ function addListItem(text, shouldSave) {
     listCount++;
 }
 
-//Save list to localStorage function
+    //Save list to localStorage function
 function saveList() {
     localStorage.setItem("savedChecklist", JSON.stringify(listArray));
     localStorage.setItem("checkedItems", JSON.stringify(checkedItemsArray));
+}
+
+    //Clear List Function
+function clearList() {
+    localStorage.removeItem("savedChecklist");
+    localStorage.removeItem("checkedItems");
+    window.location.reload();
 }

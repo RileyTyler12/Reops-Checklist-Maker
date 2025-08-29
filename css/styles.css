@@ -49,6 +49,27 @@ h1 {
     margin: 2%;
 }
 
+button {
+    font-weight: bold;
+    transition: 1s;
+}
+
+button:hover {
+    background-color: #726da8;
+    transition: 1s;
+}
+
+#clearListButton {
+    background-color: red;
+    border-color: red;
+    transition: 1s;
+}
+
+#clearListButton:hover {
+    background-color: darkred;
+    transition: 1s;
+}
+
 /* Add To List Section Styles */
 fieldset {
     display: flex;
