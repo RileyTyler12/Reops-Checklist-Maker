@@ -2,16 +2,25 @@
 //JS for handling the functionality of the checklist.
 "use strict";
 
-//Check for saved list, if so populate listArray with saved list and html list
+//Check for savedChecklist, if so populate listArray with saved list and add list to html with with addListItem()
 let listArray;
+let listCount = 0;
+let checkedItemsArray;
 if (localStorage.getItem("savedChecklist") !== null) {
     listArray = JSON.parse(localStorage.getItem("savedChecklist"));
+
+    //Check for saved checkedItems associative array. (if there is a savedChecklist, there must be a checkItems)
+    if (localStorage.getItem("checkedItems") !== null) {
+        checkedItemsArray = JSON.parse(localStorage.getItem("checkedItems"));
+    }
+
     listArray.forEach(element => {
         addListItem(element, false);
     });
 }
 else {
     listArray = new Array();
+    checkedItemsArray = new Array(listArray.length);
 }
 
 //Create Reference to addButton
@@ -38,21 +47,42 @@ function addListItem(text, shouldSave) {
     let listElement = document.createElement("li");
     let checkboxElement = document.createElement("input");
     let checkboxText = document.createElement("p");
+
     checkboxElement.type = "checkbox";
+    checkboxElement.id = listCount;
+    checkboxElement.addEventListener("click", function(event) { //checkbox event listener and function to handle checked status
+        if (event.target.checked) {
+            checkedItemsArray[parseInt(event.target.id)] = true;
+            saveList(); //call save list
+            console.log("item " + event.target.id + " checked");
+        }
+        else {
+            checkedItemsArray[parseInt(event.target.id)] = false;
+            saveList(); //call save list
+            console.log("item " + event.target.id + " unchecked")
+        }
+    });
     checkboxElement.value = text;
     checkboxText.innerHTML = text;
+    if (checkedItemsArray[parseInt(checkboxElement.id)] === true) { //check checkedItems associative array for checked status
+        checkboxElement.checked = true;
+    }
+
     listElement.className = "emerald"; //apply css class to list element
     listElement.appendChild(checkboxElement);
     listElement.appendChild(checkboxText);
+
     checklist.appendChild(listElement);
     if (shouldSave) {
         listArray.push(text);
         //call save list
         saveList();
     }
+    listCount++;
 }
 
 //Save list to localStorage function
 function saveList() {
     localStorage.setItem("savedChecklist", JSON.stringify(listArray));
+    localStorage.setItem("checkedItems", JSON.stringify(checkedItemsArray));
 }
