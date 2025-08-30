@@ -17,6 +17,8 @@ if (localStorage.getItem("savedChecklist") !== null) {
     listArray.forEach(element => {
         addListItem(element, false);
     });
+    //sort list on page
+    sortList();
 }
 else {
     listArray = new Array();
@@ -64,6 +66,8 @@ function addListItem(text, shouldSave) {
             saveList(); //call save list
             console.log("item " + event.target.id + " unchecked")
         }
+        //sort list on page
+        sortList();
     });
     checkboxElement.value = text;
     checkboxText.innerHTML = text;
@@ -72,16 +76,34 @@ function addListItem(text, shouldSave) {
     }
 
     listElement.className = "emerald"; //apply css class to list element
+    listElement.id = "listElement" + listCount;
     listElement.appendChild(checkboxElement);
     listElement.appendChild(checkboxText);
 
     checklist.appendChild(listElement);
     if (shouldSave) {
         listArray.push(text);
-        //call save list
+        //save list
         saveList();
     }
     listCount++;
+}
+
+    //Sort Entire List to Checked and Unchecked Function
+function sortList() {
+    for (let i = 0; i <= listCount; i++) {
+        let uncheckedList = document.getElementById("checklist");
+        let checkedList = document.getElementById("checklist-checked");
+        let listElement = document.getElementById("listElement" + i);
+        let checkboxElement = document.getElementById(i);
+        if (checkboxElement && checkboxElement.checked) {
+            checkedList.appendChild(listElement);
+        }
+        else if (checkboxElement) {
+            uncheckedList.appendChild(listElement);
+        }
+    }
+    console.log("list sorted");
 }
 
     //Save list to localStorage function
